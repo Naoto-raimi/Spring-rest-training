@@ -7,7 +7,13 @@ import java.util.List;
 public interface EmployeeService {
     List<Employee> findAll();
 
-    List<Employee> findByNameLike(String keyword);
+    Employee findById(Integer id);
 
     void insert(Employee employee);
+
+    void update(Employee employee);
+
+    void delete(Integer id);
+
+    boolean exists(Integer id);
 }

@@ -4,7 +4,6 @@ import com.example.persistence.entity.Employee;
 import com.example.persistence.mapper.EmployeeMapper;
 import com.example.service.EmployeeService;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,22 +16,35 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<Employee> findAll() {
         List<Employee> employeeList = employeeMapper.findAll();
         return employeeList;
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public List<Employee> findByNameLike(String keyword) {
-        List<Employee> employeeList = employeeMapper.findByNameLike("%" + keyword + "%");
-        return employeeList;
+    public Employee findById(Integer id) {
+        Employee employee = employeeMapper.findById(id);
+        return employee;
     }
 
     @Override
-    @Transactional(readOnly = false)
     public void insert(Employee employee) {
         employeeMapper.insert(employee);
+    }
+
+    @Override
+    public void update(Employee employee) {
+        employeeMapper.update(employee);
+    }
+
+    @Override
+    public void delete(Integer id) {
+        employeeMapper.delete(id);
+    }
+
+    @Override
+    public boolean exists(Integer id) {
+        int count = employeeMapper.countById(id);
+        return count == 1;
     }
 }
