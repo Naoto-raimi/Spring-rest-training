@@ -59,4 +59,25 @@ public class EmployeeRestController {
         // 戻り値がJSONに変換される
         return ResponseEntity.created(location).build();
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity update(@PathVariable Integer id,
+                                 @RequestBody EmployeeRequest employeeRequest) {
+        // EmployeeRequestをEmployeeに変換
+        Employee employee = employeeRequest.convertToEntity();
+        // EmployeeRequestにはidが含まれていないので、idをセット
+        employee.setId(id);
+        // DBを更新
+        employeeService.update(employee);
+        // 200 OKでレスポンス
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity delete(@PathVariable Integer id) {
+        // DBから削除
+        employeeService.delete(id);
+        // 204 No Contentでレスポンス
+        return ResponseEntity.noContent().build();
+    }
 }
