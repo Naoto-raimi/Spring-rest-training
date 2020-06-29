@@ -9,11 +9,11 @@ public interface EmployeeService {
 
     Employee findById(Integer id);
 
-//    void insert(Employee employee);
-//
-//    void update(Employee employee);
-//
-//    void delete(Integer id);
-//
-//    boolean exists(Integer id);
+    void insert(Employee employee);
+
+    void update(Employee employee);
+
+    void delete(Integer id);
+
+    boolean exists(Integer id);
 }

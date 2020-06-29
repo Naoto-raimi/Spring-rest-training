@@ -27,24 +27,24 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employee;
     }
 
-//    @Override
-//    public void insert(Employee employee) {
-//        employeeMapper.insert(employee);
-//    }
-//
-//    @Override
-//    public void update(Employee employee) {
-//        employeeMapper.update(employee);
-//    }
-//
-//    @Override
-//    public void delete(Integer id) {
-//        employeeMapper.delete(id);
-//    }
-//
-//    @Override
-//    public boolean exists(Integer id) {
-//        int count = employeeMapper.countById(id);
-//        return count == 1;
-//    }
+    @Override
+    public void insert(Employee employee) {
+        employeeMapper.insert(employee);
+    }
+
+    @Override
+    public void update(Employee employee) {
+        employeeMapper.update(employee);
+    }
+
+    @Override
+    public void delete(Integer id) {
+        employeeMapper.delete(id);
+    }
+
+    @Override
+    public boolean exists(Integer id) {
+        int count = employeeMapper.countById(id);
+        return count == 1;
+    }
 }

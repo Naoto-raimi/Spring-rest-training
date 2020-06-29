@@ -2,6 +2,7 @@ package com.example.web.rest;
 
 import com.example.persistence.entity.Employee;
 import com.example.service.EmployeeService;
+import com.example.web.request.EmployeeRequest;
 import com.example.web.response.EmployeeResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -43,5 +44,19 @@ public class EmployeeRestController {
         EmployeeResponse employeeResponse = new EmployeeResponse(employee);
         // 戻り値がJSONに変換される
         return employeeResponse;
+    }
+
+    @PostMapping
+    public ResponseEntity insert(@RequestBody EmployeeRequest employeeRequest) {
+        //requestをentityに変換
+        Employee employee = employeeRequest.convertToEntity();
+        //DBに追加
+        employeeService.insert(employee);
+        // 追加した社員を表すURLを作成
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                .pathSegment(employee.getId().toString())
+                .build().encode().toUri();
+        // 戻り値がJSONに変換される
+        return ResponseEntity.created(location).build();
     }
 }
